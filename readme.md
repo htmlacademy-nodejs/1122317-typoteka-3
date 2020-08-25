@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анастасия Тютрюмова](https://up.htmlacademy.ru/nodejs/3/user/1122317).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Семиколенов](https://up.htmlacademy.ru/nodejs/3/user/19706).
 
 ---
 
