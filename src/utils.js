@@ -1,4 +1,7 @@
 'use strict';
+const {
+  MONTHS
+} = require(`./constants`);
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -16,22 +19,26 @@ const shuffle = (someArray) => {
 };
 
 const getCountDays = (month, year) => {
+  const COUNT_DAYS_NOT_LEAP_FEBRUARY = 28;
+  const COUNT_DAYS_LEAP_FEBRUARY = 29;
+  const COUNT_DAYS_MONTH_BIG = 31;
+  const COUNT_DAYS_MONTH_SMALL = 30;
   const isLeap = (y) => y & 3 || (!(y % 25) && y & 15);
 
   switch (month) {
-    case 4:
-    case 6:
-    case 9:
-    case 11:
-      return 31;
-    case 2:
+    case MONTHS.april:
+    case MONTHS.june:
+    case MONTHS.september:
+    case MONTHS.november:
+      return COUNT_DAYS_MONTH_BIG;
+    case MONTHS.february:
       if (isLeap(+year)) {
-        return 28;
+        return COUNT_DAYS_NOT_LEAP_FEBRUARY;
       } else {
-        return 29;
+        return COUNT_DAYS_LEAP_FEBRUARY;
       }
     default:
-      return 30;
+      return COUNT_DAYS_MONTH_SMALL;
   }
 };
 
@@ -64,7 +71,7 @@ const getRandomDate = () => {
   const randomMonth = getRandomInt(minMonth, currentMonth);
   const resultYear = currentMonth - MAX_DIFF > randomMonth ? currentYear - 1 : currentYear;
 
-  const countDays = getCountDays(randomMonth, resultYear);
+  const countDays = getCountDays(randomMonth + 1, resultYear);
   const minDay = currentMonth - randomMonth === MAX_DIFF ? currentDay : 1;
   const randomDay = getRandomInt(minDay, countDays);
 
